@@ -65,7 +65,7 @@ About Q2A Market
 ================
 [Q2A Market ][author]is the leading developer for Question2Answer open source system. It is providing high quality theme, plugins and customization service.
 
-Find out more for ####[Q2A Market][author]
+Find out more for [Q2A Market][author]
 
 
 Disclaimer
