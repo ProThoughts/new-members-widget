@@ -1,0 +1,97 @@
+/*
+*	Q2AM New Member Widget
+*
+*	Add newly registered members avatar widget.
+*	File: Stylesheet
+*	
+*	@author			Q2A Market
+*	@category		Plugin
+*	@Version: 		1.0
+*	
+*	@Q2A Version	1.5.3
+*
+*	Modifying this file may affect look and position of next and previous link. You may add additional class to customize look and feel.
+*/
+
+.qa-new-members {
+    margin: 0;
+} 
+.qa-new-members-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.qa-new-members-list li.qa-new-member-avatar {
+	position: relative;
+	display:inline-block;
+}
+.qa-new-members-list li.qa-new-member-avatar a {
+	margin: 0 !important;
+}
+.qa-new-members-list li.qa-new-member-avatar img{
+	vertical-align: bottom;
+	border: 1px solid #eee;
+	-webkit-transition: all ease-in-out 0.2s;
+	-moz-transition: all ease-in-out 0.2s;
+	-ms-transition: all ease-in-out 0.2s;
+	-o-transition: all ease-in-out 0.2s;
+	transition: all ease-in-out 0.2s;
+}
+.qa-new-members-list li.qa-new-member-avatar:hover img{
+	border: 1px solid #fff;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,2);
+	-webkit-transition: all ease-in-out 0.15s;
+	-moz-transition: all ease-in-out 0.15s;
+	-ms-transition: all ease-in-out 0.15s;
+	-o-transition: all ease-in-out 0.15s;
+	transition: all ease-in-out 0.15s;
+}
+.qa-new-members-list li.qa-new-member-avatar .hover-cont {
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1NDU0NSIgc3RvcC1vcGFjaXR5PSIwLjkiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1MjUyNSIgc3RvcC1vcGFjaXR5PSIwLjkiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+	background: -moz-linear-gradient(top,  rgba(69,69,69,0.9) 0%, rgba(37,37,37,0.9) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,69,69,0.9)), color-stop(100%,rgba(37,37,37,0.9))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(69,69,69,0.9) 0%,rgba(37,37,37,0.9) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(69,69,69,0.9) 0%,rgba(37,37,37,0.9) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(69,69,69,0.9) 0%,rgba(37,37,37,0.9) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(69,69,69,0.9) 0%,rgba(37,37,37,0.9) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6454545', endColorstr='#e6252525',GradientType=0 ); /* IE6-8 */
+
+	display: none;
+	position: absolute;
+	top: -45px;
+	left: -50px;
+	color: #aaa;
+	width:130px;
+	height: auto;
+	padding: 5px;
+	z-index: 999;
+	border-radius: 2px;
+	border-style: solid;
+	border-width: 1px 1px 0;
+	border-color: #888 #666 #222;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+}
+.qa-new-members-list li.qa-new-member-avatar .hover-cont:after {
+	content: "";
+	position: absolute;
+	bottom: -8px;
+	left: 56px;
+	width: 0; 
+	height: 0; 
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;	
+	border-top: 8px solid #222;
+	border-top: 8px solid rgba(34,34,34,0.9);
+	z-index: 9999
+}
+.qa-new-members-list li.qa-new-member-avatar .hover-cont .qa-user-link {
+	color: #fff !important;
+	line-height: 12px;
+}
+.qa-new-members-list li.qa-new-member-avatar .hover-cont p {
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
+	line-height: 11px
+}
