@@ -3,7 +3,7 @@
 /*
 	Plugin Name: Q2AM New Members Widget
 	Plugin URI: https://github.com/q2amarket/new-members-widget
-	Plugin Update Check URI: https://github.com/q2amarket/new-members-widget/blob/master/qa-plugin.php
+	Plugin Update Check URI: https://github.com/q2amarket/new-members-widget/raw/master/qa-plugin.php
 	Plugin Description: Display newly registered members widget
 	Plugin Version: 1.0
 	Plugin Date: 2012-11-29
