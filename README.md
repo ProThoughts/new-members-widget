@@ -1,15 +1,19 @@
 NEW MEMBERS WIDGET
 ==================
+VERSION 1.1
+-----------
 
 This plugin will allow to add widget to display newly registred memebers on Question2Answer website.
 
 Features
 --------
-- User avatr
+- List / Grid view option (new)
+- User points display (new)
+- Stylesheet modified (new)
+- User avatar
 - Limit how many members want to display on widget
 - Tolltip with username and registered date
 - Enable or disable tooltip
-
 
 Installation Guide
 ------------------
@@ -51,11 +55,27 @@ Set how many newly registered members you want to display in widget.
 ##### Show hover details
 Select to display tooltip when user will hover mouse on avatar. Tooltip will display username and registration date.
 
+##### Show points (new)
+Select to display user points after username.
+
+##### List view (new)
+Select to display user avatar and details in list view.  
+Default: Grid view
+
+##### Member count
+Set how many newly registered members you want to display in widget.
+
 ##### Save Changes
 Will save all changes.
 
 ##### Reset to Defaults
 Will discard all changes and reset to default settings.
+
+Change Logs
+===========
+- List view added
+- User points added
+- Stylesheet modified
 
 About Question2Answer
 =====================

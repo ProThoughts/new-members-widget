@@ -7,7 +7,8 @@
 *	
 *	@author			Q2A Market
 *	@category		Plugin
-*	@Version: 		1.0
+*	@Version: 		1.1
+*	@url			http://www.q2amarket.com
 *	
 *	@Q2A Version	1.5.3
 *
@@ -42,6 +43,8 @@ class qa_new_members_widget {
 			qa_opt('new_members_widget_title', qa_post_text('new_members_widget_title'));
 			qa_opt('member_count', qa_post_text('member_count'));
 			qa_opt('q2am_show_hover', (bool)qa_post_text('q2am_show_hover'));
+			qa_opt('q2am_show_points', (bool)qa_post_text('q2am_show_points'));
+			qa_opt('q2am_list_view', (bool)qa_post_text('q2am_list_view'));
 			
 			$saved = true;
 		
@@ -86,7 +89,21 @@ class qa_new_members_widget {
 					'tags' => 'NAME="q2am_show_hover"',
 					'value' => qa_opt('q2am_show_hover'),
 					'type' => 'checkbox',
-				),				
+				),
+
+				array(
+					'label' => 'Show points',
+					'tags' => 'NAME="q2am_show_points"',
+					'value' => qa_opt('q2am_show_points'),
+					'type' => 'checkbox',
+				),
+				
+				array(
+					'label' => 'List view',
+					'tags' => 'NAME="q2am_list_view"',
+					'value' => qa_opt('q2am_list_view'),
+					'type' => 'checkbox',
+				),
 				
 				array(
 					'type' => 'blank',
@@ -167,13 +184,13 @@ class qa_new_members_widget {
 	// widget output to front end
 	function output_widget($region, $place, $themeobject, $template, $request, $qa_content) {
 		
-		$query = "SELECT userid,email,handle,avatarblobid,avatarwidth,avatarheight,flags,created
-		FROM ^users
+		$query = "SELECT ^users.userid,^users.email,^users.handle,^users.avatarblobid,^users.avatarwidth,^users.avatarheight,^users.flags,^users.created,^userpoints.points
+		FROM ^users LEFT JOIN ^userpoints
+		ON ^users.userid = ^userpoints.userid
 		ORDER BY userid
 		DESC LIMIT 0, ".qa_opt('member_count')."";			
 
-		$query_fetch = qa_db_query_sub($query);			
-				
+		$query_fetch = qa_db_query_sub($query);	
 
 		if ($region=='side') {			
 			
@@ -187,9 +204,10 @@ class qa_new_members_widget {
 				);
 			}
 			
+			$list_class = qa_opt('q2am_list_view') ? "list" : "grid";			
 			$themeobject->output(
 				'<DIV CLASS="qa-new-members"> <!-- qa-new-members-->', 
-				'<UL CLASS="qa-new-members-list clearfix"> <!-- qa-new-members-list-->'
+				'<UL CLASS="clearfix qa-new-members-'.$list_class.'"> <!-- qa-new-members-list-->'
 			);
 				
 			while ( ($member = qa_db_read_one_assoc($query_fetch,true)) !== null ) {
@@ -200,15 +218,29 @@ class qa_new_members_widget {
 					$new_date = date('M d, Y', strtotime($original_date));
 					
 					$themeobject->output('<LI CLASS="qa-new-member-avatar" STYLE="height:'.qa_opt('avatar_users_size').'">');
-					
+						
+						if(qa_opt('q2am_list_view'))
+						$themeobject->output('<DIV CLASS="qa-avatar-box">');
+						
 						$themeobject->output(qa_get_user_avatar_html($member['flags'], $member['email'], $member['handle'], $member['avatarblobid'], $member['avatarwidth'], $member['avatarheight'], qa_opt('avatar_users_size'), false));
 						
-					if(qa_opt('q2am_show_hover')){
-						$themeobject->output('<DIV CLASS="hover-cont">');
+						if(qa_opt('q2am_list_view'))
+						$themeobject->output('</DIV>');
 						
-							$themeobject->output(qa_get_one_user_html($member['handle'], false));					
+					if(qa_opt('q2am_show_hover') && !qa_opt('q2am_list_view')){
+						$themeobject->output('<DIV CLASS="hover-cont">');						
+							$themeobject->output(qa_get_one_user_html($member['handle'], false));
+							if (qa_opt('q2am_show_points'))
+							$themeobject->output('<SPAN class="qa-user-points">(points ', $member['points'], ')</SPAN>');
 							$themeobject->output('<P> Registerd on ', $new_date, '</P>');									
 						$themeobject->output('</DIV>');
+					} else {
+						
+						$themeobject->output('<P CLASS="qa-details">',qa_get_one_user_html($member['handle'], false));
+						if (qa_opt('q2am_show_points'))
+						$themeobject->output('<SPAN class="qa-user-points">(points ', $member['points'], ')</SPAN>');
+						$themeobject->output('<SPAN CLASS="qa-user-date">Registerd on ', $new_date, '</SPAN></P>');	
+					
 					}
                     
                     $themeobject->output('</LI>');
@@ -245,7 +277,7 @@ class qa_new_members_widget {
 					$original_date = substr($member['created'],0,11);
 					$new_date = date('M d, Y', strtotime($original_date));
 					
-					$themeobject->output('<LI CLASS="qa-new-member-avatar" STYLE="height:'.qa_opt('avatar_users_size').'">');
+					$themeobject->output('<LI CLASS="qa-new-member-avatar">'); //
 					
 						$themeobject->output(qa_get_user_avatar_html($member['flags'], $member['email'], $member['handle'], $member['avatarblobid'], $member['avatarwidth'], $member['avatarheight'], qa_opt('avatar_users_size'), false));
 						
@@ -254,7 +286,8 @@ class qa_new_members_widget {
 						$themeobject->output('<DIV CLASS="hover-cont">');
 						
 							$themeobject->output(qa_get_one_user_html($member['handle'], false));					
-							$themeobject->output('<P> Registerd on ', $new_date, '</P>');									
+							$themeobject->output('<P> Registerd on ', $new_date, '</P>');
+							
 						$themeobject->output('</DIV>');
 					}
                     
